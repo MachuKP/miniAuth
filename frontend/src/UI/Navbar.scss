@@ -1,0 +1,22 @@
+.navbar {
+    background-color: salmon;
+    color: #fff;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    .left-content {
+        span {
+            font-weight: 800;
+            font-size: 20px;
+        }
+    }
+    .right-content {
+        ul {
+            display: flex;
+            li {
+                margin-left: 15px;
+            }
+        }
+
+    }
+}
