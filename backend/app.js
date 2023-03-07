@@ -6,6 +6,7 @@ const connectDB = require('./config/connectDB')
 const { errorHandler } = require('./middleware/errorMiddleware')
 
 const authRoute = require('./routes/user');
+const goalRoute = require('./routes/goal')
 
 const port = process.env.PORT || 3000
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/api/user', authRoute)
+app.use('/api/goal', goalRoute)
 
 app.use(errorHandler)
 

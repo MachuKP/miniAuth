@@ -1,6 +1,6 @@
 import Navbar from './UI/Navbar'
 import './App.scss'
-import Greeting from './pages/Greeting'
+import DailyLog from './pages/DailyLog'
 import Login from './pages/Login'
 import { useState } from 'react'
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Navbar isLogin={isLogin} handleLogout={handleLogout} />
-      {isLogin ? <Greeting handleLogout={handleLogout} /> : <Login handleLogin={handleLogin} />}
+      {isLogin ? <DailyLog handleLogout={handleLogout} /> : <Login handleLogin={handleLogin} />}
     </div>
   )
 }

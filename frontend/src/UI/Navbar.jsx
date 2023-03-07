@@ -9,7 +9,7 @@ const Navbar = (props) => {
       <div className="right-content">
         {props.isLogin ? (
           <ul>
-            <li>Greeting</li>
+            <li>DailyLog</li>
             <li onClick={props.handleLogout}>Logout</li>
           </ul>
         ) : (

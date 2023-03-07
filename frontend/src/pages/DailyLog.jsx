@@ -1,14 +1,14 @@
 import PageLayout from "../UI/PageLayout"
 import Card from "../UI/Card"
-import "./Greeting.scss"
+import "./DailyLog.scss"
 
-const Greeting = (props) => {
+const DailyLog = (props) => {
   return (
     <PageLayout>
         <Card>
           <div className="greeting-container">
             <div className="title">
-                Greeting Korn
+                Hi Korn
             </div>
             <div className="btn-container">
                 <button className="btn-primary" onClick={props.handleLogout}>Logout</button>
@@ -19,4 +19,4 @@ const Greeting = (props) => {
   )
 }
 
-export default Greeting
+export default DailyLog
