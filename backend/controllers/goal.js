@@ -1,6 +1,7 @@
 // use handler instead of try catch for async function because mongo return promise
 const asyncHandler = require("express-async-handler");
 const moment = require("moment");
+const mongoose = require("mongoose");
 
 const Goal = require("../models/goal");
 const DailyLog = require("../models/dailyLog");
@@ -31,10 +32,10 @@ const getDailyLog = asyncHandler(async (req, res) => {
     if (goal && goal.length > 0) {
       for (let i = 0; i < goal.length; i++) {
         if (goal[i].repeat[moment().weekday()] == "1") {
-            let goalItem = {
-                text: goal[i].text,
-                status: goal[i].status
-            }
+          let goalItem = {
+            text: goal[i].text,
+            status: goal[i].status,
+          };
           LogItems.push(goalItem);
         }
       }
@@ -60,9 +61,9 @@ const createGoal = asyncHandler(async (req, res) => {
   let endOfYesterday = moment().subtract(1, "days").endOf("day").toISOString();
 
   const existedTodayLog = await DailyLog.find({
+    user: req.user.id,
     createdAt: {
       $gte: endOfYesterday,
-      user: req.user.id,
     },
   });
 
@@ -76,16 +77,17 @@ const createGoal = asyncHandler(async (req, res) => {
       user: req.user.id,
     });
 
-
     if (newGoal) {
       if (existedTodayLog) {
-        let newItem = [existedTodayLog.items];
+        let newItem = [...existedTodayLog[0].items];
         if (newGoal.repeat[moment().weekday()] == "1") {
           newItem.push({
-            text: newGoal.text
-        });
+            text: newGoal.text,
+            status: newGoal.status,
+            _id: new mongoose.Types.ObjectId(newGoal.id)
+          });
         }
-        await DailyLog.findByIdAndUpdate(existedTodayLog.id, {
+        await DailyLog.findByIdAndUpdate(existedTodayLog[0].id, {
           items: newItem,
         });
       }
@@ -96,8 +98,6 @@ const createGoal = asyncHandler(async (req, res) => {
         status: newGoal.status,
         repeat: newGoal.repeat,
       });
-
-
     } else {
       res.status(400);
       throw new Error("Invalide Goal");
