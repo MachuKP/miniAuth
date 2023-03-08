@@ -1,4 +1,5 @@
 import "./Navbar.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
@@ -9,11 +10,19 @@ const Navbar = (props) => {
       <div className="right-content">
         {props.isLogin ? (
           <ul>
-            <li>DailyLog</li>
+            <li>
+              <Link to="/">DailyLog</Link>
+            </li>
+            <li>
+              <Link to="/goal">Goal</Link>
+            </li>
             <li onClick={props.handleLogout}>Logout</li>
           </ul>
         ) : (
-          <div>Login</div>
+          <ul>
+            <li><Link to="/">Login</Link></li>
+            <li><Link to="/regist">Register</Link></li>
+          </ul>
         )}
       </div>
     </div>
