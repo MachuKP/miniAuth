@@ -1,7 +1,11 @@
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from '../redux/authStore'
+//component
 import PageLayout from "../UI/PageLayout";
 import Card from "../UI/Card";
-import { useRef, useState } from "react";
-import Input from "../UI/Input";
+import Input from "../components/Input";
+//style
 import "./Login.scss";
 
 const Login = (props) => {
@@ -29,6 +33,9 @@ const Login = (props) => {
     }
   };
 
+  const { count } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
   return (
     <PageLayout>
       <Card>
@@ -53,6 +60,11 @@ const Login = (props) => {
               </button>
             </div>
           </form>
+          <div>
+            <div>{count}</div>
+            <button onClick={() => dispatch(increment())}>+</button>
+            <button onClick={() => dispatch(decrement())}>-</button>
+          </div>
         </div>
       </Card>
     </PageLayout>

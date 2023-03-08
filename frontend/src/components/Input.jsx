@@ -11,30 +11,33 @@ const Input = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     onParentsSubmit() {
-      const checkValidate = isEmtry(inputRef.current?.value);
-      setInputValidate(checkValidate);
-      props.validateData(inputValidate)
+      checkValidate()
+      props.onChangeValue(props.id, inputRef.current?.value, inputValidate);
     }
   }));
 
-  const changeInput = () => {
+  const checkValidate = () => {
     const checkValidate = isEmtry(inputRef.current?.value);
     setInputValidate(checkValidate);
-    props.onChangeValue(inputValidate)
+  }
+
+  const changeInput = () => {
+    checkValidate()
+    props.onChangeValue(props.id, inputRef.current?.value, inputValidate);
   }
 
   const onBlurHandlerInput = (inputRef) => {
     const checkValidate = isEmtry(inputRef.current?.value);
     setInputValidate(checkValidate);
-    props.validateData(inputValidate)
+    props.onChangeValue(props.id, inputRef.current?.value, inputValidate);
   };
 
   return (
     <div className={`input-container ${inputValidate === null || inputValidate ? "" : "error"}`}>
-      <label htmlFor={props.name}>{props.name}</label>
+      <label htmlFor={props.id}>{props.name}</label>
       <input
         type="text"
-        id={props.name}
+        id={props.id}
         ref={inputRef}
         onChange={changeInput}
         onBlur={onBlurHandlerInput.bind(this, inputRef)}

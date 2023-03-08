@@ -1,4 +1,4 @@
-import Navbar from './UI/Navbar'
+import Navbar from './components/Navbar'
 import './App.scss'
 import DailyLog from './pages/DailyLog'
 import Login from './pages/Login'
