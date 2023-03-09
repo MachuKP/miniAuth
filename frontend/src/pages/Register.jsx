@@ -11,7 +11,7 @@ import { LoadingSpinner } from "../UI/LoadingSpinner";
 //style
 import "./Register.scss";
 
-const Register = (props) => {
+const Register = () => {
   const [formValidate, setFormValidate] = useState({
     username: null,
     email: null,
@@ -89,12 +89,9 @@ const Register = (props) => {
     }
   };
 
-  if (isLoading) {
-    return <LoadingSpinner />
-  }
-
   return (
     <PageLayout>
+      {isLoading && <LoadingSpinner />}
       <Card>
         <div className="regist-content">
           <div className="title">Register</div>

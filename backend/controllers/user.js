@@ -23,7 +23,6 @@ const getUser = asyncHandler(async(req, res) => {
 const createUser = asyncHandler(async(req, res) => {
     const { email, password, username } = req.body
     if (!email || !password || !username) {
-        console.log(req, 'kkkkkkkkkkkkkkkkkkkkkkkk')
         res.status(400)
         throw new Error("Please fill all field")
     }

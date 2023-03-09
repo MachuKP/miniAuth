@@ -28,7 +28,6 @@ const getDailyLog = asyncHandler(async (req, res) => {
     // generate new log
     const goal = await Goal.find({ user: req.user.id });
     let LogItems = [];
-    console.log(goal, "generate new log");
     if (goal && goal.length > 0) {
       for (let i = 0; i < goal.length; i++) {
         if (goal[i].repeat[moment().weekday()] == "1") {

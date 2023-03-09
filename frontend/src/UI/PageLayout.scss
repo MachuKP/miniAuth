@@ -2,6 +2,7 @@
     height: calc(100vh - 50px);
     width: 100%;
     position: relative;
+    z-index: 3;
     background-image: url("../assets/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;

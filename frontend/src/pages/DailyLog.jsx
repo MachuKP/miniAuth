@@ -4,16 +4,13 @@ import Card from "../UI/Card"
 //style
 import "./DailyLog.scss"
 
-const DailyLog = (props) => {
+const DailyLog = () => {
   return (
     <PageLayout>
         <Card>
           <div className="greeting-container">
             <div className="title">
                 Hi Korn
-            </div>
-            <div className="btn-container">
-                <button className="btn-primary" onClick={props.handleLogout}>Logout</button>
             </div>
           </div>
         </Card>

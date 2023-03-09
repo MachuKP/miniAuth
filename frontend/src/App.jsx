@@ -6,7 +6,6 @@ import './App.scss'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 //route
-import { useState } from 'react'
 import {
   Route,
   Routes
@@ -15,23 +14,17 @@ import {
 import DailyLog from './pages/DailyLog'
 import Login from './pages/Login'
 import Register from './pages/Register'
+//redux
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const handleLogin = () => {
-    setIsLogin(true)
-  }
-
-  const handleLogout = () => {
-    setIsLogin(false)
-  }
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="App">
-        <Navbar isLogin={isLogin} handleLogout={handleLogout} />
+        <Navbar isLogin={user} />
         <Routes>
-          <Route path='/' element={isLogin ? <DailyLog handleLogout={handleLogout} /> : <Login handleLogin={handleLogin} />} />
+          <Route path='/' element={user ? <DailyLog /> : <Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>
         <ToastContainer />

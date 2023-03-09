@@ -1,7 +1,20 @@
+import { Link, useNavigate } from "react-router-dom";
+//style
 import "./Navbar.scss";
-import { Link } from "react-router-dom";
+//redux
+import { useDispatch } from "react-redux";
+import { reset, logout } from "../redux/authStore";
 
 const Navbar = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(reset());
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <div className="navbar">
       <div className="left-content">
@@ -16,12 +29,16 @@ const Navbar = (props) => {
             <li>
               <Link to="/goal">Goal</Link>
             </li>
-            <li onClick={props.handleLogout}>Logout</li>
+            <li onClick={handleLogout}>Logout</li>
           </ul>
         ) : (
           <ul>
-            <li><Link to="/">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+            <li>
+              <Link to="/">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
           </ul>
         )}
       </div>
