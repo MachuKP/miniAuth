@@ -1,12 +1,19 @@
+//component
 import Navbar from './components/Navbar'
+//style
 import './App.scss'
-import DailyLog from './pages/DailyLog'
-import Login from './pages/Login'
+//pugin
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+//route
 import { useState } from 'react'
 import {
   Route,
   Routes
 } from "react-router-dom";
+//page
+import DailyLog from './pages/DailyLog'
+import Login from './pages/Login'
 import Register from './pages/Register'
 
 function App() {
@@ -25,8 +32,9 @@ function App() {
         <Navbar isLogin={isLogin} handleLogout={handleLogout} />
         <Routes>
           <Route path='/' element={isLogin ? <DailyLog handleLogout={handleLogout} /> : <Login handleLogin={handleLogin} />} />
-          <Route path='/regist' element={<Register />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
+        <ToastContainer />
     </div>
   )
 }

@@ -1,7 +1,14 @@
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { reset, register } from "../redux/authStore";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+//component
 import PageLayout from "../UI/PageLayout";
 import Card from "../UI/Card";
-import { useRef, useState } from "react";
 import Input from "../components/Input";
+import { LoadingSpinner } from "../UI/LoadingSpinner";
+//style
 import "./Register.scss";
 
 const Register = (props) => {
@@ -25,6 +32,25 @@ const Register = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmInputRef = useRef();
+
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError && message) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, dispatch, navigate]);
 
   const onChangeInput = (id, value, validate) => {
     setFormData((prevState) => ({
@@ -50,9 +76,22 @@ const Register = (props) => {
       formValidate.password &&
       formValidate.confirm
     ) {
-      console.log(username, email, password, confirm);
+      if (password !== confirm) {
+        toast.error("Passwords don't match");
+      } else {
+        const userData = {
+          username,
+          email,
+          password,
+        };
+        dispatch(register(userData));
+      }
     }
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <PageLayout>

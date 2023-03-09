@@ -1,4 +1,4 @@
-import { useRef, useState, useImperativeHandle, forwardRef, useEffect } from "react";
+import { useRef, useState, useImperativeHandle, forwardRef } from "react";
 import "./Input.scss";
 
 const isEmtry = (input) => {

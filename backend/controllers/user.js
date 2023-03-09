@@ -9,7 +9,6 @@ const User = require('../models/user');
 // @route  GET api/user
 // @access Plubic
 const getUser = asyncHandler(async(req, res) => {
-    console.log(req)
     const { _id, username, email } = await User.findById(req.user.id)
     res.status(200).json({
         _id,
@@ -24,6 +23,7 @@ const getUser = asyncHandler(async(req, res) => {
 const createUser = asyncHandler(async(req, res) => {
     const { email, password, username } = req.body
     if (!email || !password || !username) {
+        console.log(req, 'kkkkkkkkkkkkkkkkkkkkkkkk')
         res.status(400)
         throw new Error("Please fill all field")
     }
@@ -51,7 +51,7 @@ const createUser = asyncHandler(async(req, res) => {
             _id: createUser.id,
             username: createUser.username,
             email: createUser.email,
-            token: genarateToken(existedUser._id)
+            token: genarateToken(createUser.id)
         })
     } else {
         res.status(400).json("User is invalided")

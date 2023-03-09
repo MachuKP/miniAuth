@@ -1,5 +1,7 @@
+//component
 import PageLayout from "../UI/PageLayout"
 import Card from "../UI/Card"
+//style
 import "./DailyLog.scss"
 
 const DailyLog = (props) => {
